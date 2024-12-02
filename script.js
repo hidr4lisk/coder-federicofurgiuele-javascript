@@ -86,7 +86,7 @@ function agregarAlCarrito(idProducto) {
 
 // Mostrar el carrito
 function mostrarCarrito(filtrar = '') {
-  const lienzo = document.getElementById("lienzo");
+  const lienzo = document.getElementById("lienzo")
   lienzo.innerHTML = '' // Limpiar el lienzo
 
   const productosAMostrar = filtrar
@@ -237,25 +237,25 @@ function renderizarStats() {
       switch (attr) {
         case 'vida':
           colorNombre = 'green' // "vida"
-          break;
+          break
         case 'daño':
           colorNombre = 'red' // "daño"
-          break;
+          break
         case 'critico':
           colorNombre = 'orange' // "critico"
-          break;
+          break
         case 'esquiva':
           colorNombre = 'gray' // "esquiva"
-          break;
+          break
         case 'bloqueo':
           colorNombre = 'violet' // "bloqueo"
-          break;
+          break
         case 'armadura':
           colorNombre = 'purple' // "armadura"
-          break;
+          break
         case 'diamantes':
           colorNombre = 'cyan' // "diamantes"
-          break;
+          break
         default:
           colorNombre = 'black' // Si no tiene un color asignado, negro por defecto
       }
@@ -263,7 +263,7 @@ function renderizarStats() {
       // Crear el HTML para el atributo con el color en el nombre y blanco en el valor
       divStat.innerHTML = `
         <p style="
-          color: ${colorNombre} 
+          color: ${colorNombre};
           text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 0 0 5px ${colorNombre}; 
           font-weight: bold; 
           text-transform: uppercase; 
