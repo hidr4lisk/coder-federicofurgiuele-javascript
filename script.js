@@ -82,6 +82,7 @@ function agregarAlCarrito(idProducto) {
   }
   guardarEnStorage("carrito", carrito)
   actualizarCantidadCarrito()
+  renderizarBotonComprar()
 }
 
 // Mostrar el carrito
@@ -99,6 +100,7 @@ function mostrarCarrito(filtrar = '') {
       ? "<p>No se encontraron productos en el carrito.</p>"
       : "<p>El carrito está vacío.</p>"
     actualizarCantidadCarrito()
+    renderizarBotonComprar()
     return
   }
 
@@ -140,25 +142,13 @@ function mostrarCarrito(filtrar = '') {
   })
 
   actualizarCantidadCarrito()
-      // Verificar si el carrito tiene productos
-    if (carrito.length > 0) {
-      // Crear el botón de comprar
-      const botonComprar = document.createElement("button")
-      botonComprar.textContent = "Comprar Carrito"
-      botonComprar.classList.add("btn-comprar")
-
-      // Agregar el evento al botón
-      botonComprar.addEventListener("click", comprarCarrito)
-
-      // Añadir el botón al lienzo
-      lienzo.appendChild(botonComprar)
-    }
 }
 
 function eliminarProductoCompleto(idProducto) {
   carrito = carrito.filter(item => item.id !== idProducto)
   guardarEnStorage("carrito", carrito)
   mostrarCarrito()
+  renderizarBotonComprar()
 }
 function comprarCarrito() {
   // Si el carrito está vacío, no tiene sentido intentar comprar
@@ -194,9 +184,31 @@ function comprarCarrito() {
   // Actualizar las estadísticas del jugador y mostrar el carrito vacío
   renderizarStats()
   mostrarCarrito()
+  renderizarBotonComprar()
   alert("¡Compra realizada con éxito!")
 }
 
+// Función para renderizar el botón de comprar carrito
+function renderizarBotonComprar() {
+  const botonera = document.getElementById("botonera")
+
+  // Verificar si el botón "Comprar Carrito" ya existe
+  let botonComprar = botonera.querySelector(".btn-comprar")
+  
+  if (carrito.length > 0) {
+    if (!botonComprar) {
+      botonComprar = document.createElement("button")
+      botonComprar.textContent = "Comprar Carrito"
+      botonComprar.classList.add("btn-comprar")
+      botonComprar.addEventListener("click", comprarCarrito)
+      botonera.appendChild(botonComprar)
+    }
+  } else if (botonComprar) {
+    // Si el carrito está vacío, eliminar el botón "Comprar Carrito"
+    botonera.removeChild(botonComprar)
+  }
+  actualizarVisibilidadBusqueda()
+}
 
 
 
@@ -210,6 +222,7 @@ function eliminarDelCarrito(idProducto) {
 
   guardarEnStorage("carrito", carrito)
   mostrarCarrito()
+  renderizarBotonComprar()
 }
 
 // Mostrar la interfaz de batalla
@@ -282,11 +295,13 @@ function renderizarStats() {
 
 
 
-// Actualizar la visibilidad de la barra de búsqueda
+// Actualizar la visibilidad de la barra de búsqueda y el botón "Comprar Carrito"
 function actualizarVisibilidadBusqueda() {
   const modo = document.querySelector("[data-modo]").dataset.modo
   const inputBuscar = document.getElementById("inputBuscar")
+  const botonComprar = document.querySelector(".btn-comprar")
 
+  // Controlar visibilidad del inputBuscar
   if (modo === "batalla") {
     inputBuscar.style.visibility = "hidden"
     inputBuscar.style.pointerEvents = "none"
@@ -294,7 +309,20 @@ function actualizarVisibilidadBusqueda() {
     inputBuscar.style.visibility = "visible"
     inputBuscar.style.pointerEvents = "auto"
   }
+
+  // Controlar visibilidad del botón "Comprar Carrito"
+  if (botonComprar) {
+    if (modo === "carrito") {
+      botonComprar.style.visibility = "visible"
+      botonComprar.style.pointerEvents = "auto"
+    } else {
+      botonComprar.style.visibility = "hidden"
+      botonComprar.style.pointerEvents = "none"
+    }
+  }
 }
+
+
 
 // Función de búsqueda global
 function buscarProductos() {
@@ -343,4 +371,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderizarStats()
   mostrarBatalla()
   actualizarCantidadCarrito()
+  renderizarBotonComprar()
 })

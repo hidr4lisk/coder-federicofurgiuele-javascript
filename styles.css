@@ -39,7 +39,7 @@ body {
 .navegacion nav {
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: left;
   gap: 20px;
   padding: 10px 50px 0;
 }
