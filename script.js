@@ -158,7 +158,7 @@ function comprarCarrito() {
   }
 
   // Calcular el costo total de los items en el carrito
-  const costoTotal = carrito.reduce((total, item) => total + item.precio, 0)
+  const costoTotal = carrito.reduce((total, item) => total + item.precio * item.cantidad, 0)
   
   // Verificar si el jugador tiene suficientes diamantes para la compra
   if (jugador.diamantes < costoTotal) {
