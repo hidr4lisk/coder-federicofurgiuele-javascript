@@ -196,19 +196,27 @@ function renderizarBotonComprar() {
   let botonComprar = botonera.querySelector(".btn-comprar")
   
   if (carrito.length > 0) {
+    // Calcular el costo total del carrito
+    const costoTotal = carrito.reduce((total, producto) => total + producto.cantidad * producto.precio, 0)
+
     if (!botonComprar) {
+      // Crear el botón si no existe
       botonComprar = document.createElement("button")
-      botonComprar.textContent = "Comprar Carrito"
       botonComprar.classList.add("btn-comprar")
       botonComprar.addEventListener("click", comprarCarrito)
       botonera.appendChild(botonComprar)
     }
+
+    // Actualizar el texto del botón
+    botonComprar.textContent = `Comprar Carrito (💎${costoTotal})`
   } else if (botonComprar) {
     // Si el carrito está vacío, eliminar el botón "Comprar Carrito"
     botonera.removeChild(botonComprar)
   }
+
   actualizarVisibilidadBusqueda()
 }
+
 
 
 
