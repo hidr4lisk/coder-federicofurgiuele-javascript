@@ -1,14 +1,54 @@
 // Importar los productos desde los archivos correspondientes
 import { items } from './items.js'
-import { jugador } from './jugador.js'
+
+// Variable global para el jugador
+let jugador = null
 
 // Variables iniciales
 let carrito = obtenerDelStorage("carrito") || [] // Cargar carrito desde localStorage si existe
-let stats = obtenerDelStorage("stats") || jugador // Cargar stats desde localStorage si existe
-jugador.diamantes = 10000 // Carga los diamantes, cuando el juego este establecido arranca en 0
-stats && Object.assign(jugador, stats)
 
-// Funciones auxiliares
+// Async function to load player stats
+async function cargarStats() {
+  // First, try to load stats from localStorage
+  let stats = obtenerDelStorage("stats");
+  
+  if (stats) {
+      jugador = stats;
+      jugador.diamantes = 10000; // Set diamonds as specified
+      return jugador;
+  }
+  
+  // If no stats in localStorage, fetch from JSON file
+  try {
+      const response = await fetch('jugador.json');
+      if (!response.ok) {
+          throw new Error('Failed to fetch player stats');
+      }
+      
+      jugador = await response.json();
+      jugador.diamantes = 10000; // Set diamonds as specified
+      
+      // Save to localStorage for future use
+      localStorage.setItem("stats", JSON.stringify(jugador));
+      
+      return jugador;
+  } catch (error) {
+      console.error('Error loading player stats:', error);
+      
+      // Fallback to a default player object if fetch fails
+      jugador = {
+          vida: 100,
+          daño: 10,
+          critico: 5,
+          esquiva: 5,
+          bloqueo: 5,
+          armadura: 10,
+          diamantes: 10000
+      };
+      
+      return jugador;
+  }
+}
 
 // Guardar datos en localStorage
 function guardarEnStorage(clave, valor) {
@@ -373,7 +413,8 @@ document.getElementById("inputBuscar").addEventListener("keydown", (event) => {
 
 // Inicialización ---------------------------------//
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarStats();
   document.querySelector("[data-modo]").dataset.modo = "batalla"
   actualizarVisibilidadBusqueda()
   renderizarStats()
