@@ -273,10 +273,103 @@ function eliminarDelCarrito(idProducto) {
   renderizarBotonComprar()
 }
 
-// Mostrar la interfaz de batalla
+// Función para generar un enemigo aleatorio
+function generarEnemigo() {
+  // Crear un enemigo con stats similares pero ligeramente aleatorios
+  return {
+      nombre: "Enemigo",
+      vida: Math.max(50, Math.floor(jugador.vida * (0.8 + Math.random() * 0.4))),
+      daño: Math.max(5, Math.floor(jugador.daño * (0.8 + Math.random() * 0.4))),
+      critico: Math.max(1, Math.floor(jugador.critico * (0.8 + Math.random() * 0.4))),
+      esquiva: Math.max(1, Math.floor(jugador.esquiva * (0.8 + Math.random() * 0.4))),
+      bloqueo: Math.max(1, Math.floor(jugador.bloqueo * (0.8 + Math.random() * 0.4))),
+      armadura: Math.max(5, Math.floor(jugador.armadura * (0.8 + Math.random() * 0.4)))
+  };
+}
+
+// Función para crear la tarjeta de batalla
+function crearTarjetaBatalla(entidad, esJugador = true) {
+  const tarjeta = document.createElement('div');
+  tarjeta.classList.add('tarjeta-batalla');
+  
+  // Estilo condicional para jugador o enemigo
+  tarjeta.style.backgroundColor = esJugador ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 0, 0, 0.2)';
+  
+  tarjeta.innerHTML = `
+      <h2>${esJugador ? 'Jugador' : entidad.nombre}</h2>
+      <div class="stats-batalla">
+          <div class="stat">
+              <span class="stat-nombre">Vida</span>
+              <span class="stat-valor">${entidad.vida}</span>
+          </div>
+          <div class="stat">
+              <span class="stat-nombre">Daño</span>
+              <span class="stat-valor">${entidad.daño}</span>
+          </div>
+          <div class="stat">
+              <span class="stat-nombre">Crítico</span>
+              <span class="stat-valor">${entidad.critico}%</span>
+          </div>
+          <div class="stat">
+              <span class="stat-nombre">Esquiva</span>
+              <span class="stat-valor">${entidad.esquiva}%</span>
+          </div>
+          <div class="stat">
+              <span class="stat-nombre">Bloqueo</span>
+              <span class="stat-valor">${entidad.bloqueo}%</span>
+          </div>
+          <div class="stat">
+              <span class="stat-nombre">Armadura</span>
+              <span class="stat-valor">${entidad.armadura}</span>
+          </div>
+      </div>
+  `;
+  
+  return tarjeta;
+}
+
+// Función para mostrar la batalla
 function mostrarBatalla() {
-  const lienzo = document.getElementById("lienzo")
-  lienzo.innerHTML = '<p>SECCION EN CONSTRUCCIÓN</p>'
+  const lienzo = document.getElementById("lienzo");
+  lienzo.innerHTML = ''; // Limpiar el lienzo
+
+  // Generar un enemigo
+  const enemigo = generarEnemigo();
+
+  // Crear contenedor para las tarjetas
+  const contenedorBatalla = document.createElement('div');
+  contenedorBatalla.classList.add('contenedor-batalla');
+
+  // Crear tarjetas para jugador y enemigo
+  const tarjetaJugador = crearTarjetaBatalla(jugador);
+  const tarjetaEnemigo = crearTarjetaBatalla(enemigo, false);
+
+  // Crear elemento VS
+  const elementoVs = document.createElement('div');
+  elementoVs.classList.add('elemento-vs');
+  elementoVs.textContent = 'VS';
+
+  // Añadir elementos al contenedor
+  contenedorBatalla.appendChild(tarjetaJugador);
+  contenedorBatalla.appendChild(elementoVs);
+  contenedorBatalla.appendChild(tarjetaEnemigo);
+
+  // Añadir botón de iniciar batalla
+  const botonBatalla = document.createElement('button');
+  botonBatalla.textContent = 'Iniciar Batalla';
+  botonBatalla.classList.add('btn-batalla');
+  botonBatalla.addEventListener('click', () => iniciarBatalla(jugador, enemigo));
+
+  // Añadir todo al lienzo
+  lienzo.appendChild(contenedorBatalla);
+  lienzo.appendChild(botonBatalla);
+}
+
+// Función básica de batalla (para expandir después)
+function iniciarBatalla(jugador, enemigo) {
+  alert('¡Batalla en construcción! Próximamente implementaremos la mecánica de combate.');
+  console.log('Jugador:', jugador);
+  console.log('Enemigo:', enemigo);
 }
 
 function renderizarStats() {
