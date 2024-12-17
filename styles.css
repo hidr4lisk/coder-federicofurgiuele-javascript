@@ -17,14 +17,6 @@ body {
   min-height: 100vh;
 }
 
-/* Contenedor principal */
-.contenedor {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
-}
-
 /* Barra de navegación fija */
 .navegacion {
   position: sticky;
@@ -50,7 +42,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 60px 20px;
   overflow-y: auto;
 }
 
@@ -139,7 +130,7 @@ button:hover {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #111;
+  background-color: #000000;
   padding: 20px;
 }
 
@@ -205,5 +196,126 @@ button:hover {
 @media (min-width: 1200px) {
   #lienzo {
     max-width: 1400px;
+  }
+}
+#lienzo.modo-batalla {
+  display: flex;
+  justify-content: space-around; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 100%; /* Ocupa todo el alto disponible */
+  margin: 0 auto; /* Centrado automático en caso de necesitar márgenes */
+  background-color: transparent; /* Fondo transparente para no ocultar nada */
+}
+#lienzo.modo-batalla {
+  display: flex;
+  flex-direction: column; /* Alinea las filas verticalmente */
+  justify-content: center; /* Centra las filas verticalmente */
+  align-items: center; /* Centra las filas horizontalmente */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 100%; /* Ocupa todo el alto disponible */
+  position: relative; /* Relativo al contenedor padre */
+  background-color: transparent; /* Fondo transparente */
+}
+
+.fila-batalla {
+  display: flex; /* Alinea los elementos en fila */
+  justify-content: space-around; /* Espaciado uniforme entre elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+  gap: 60px;
+}
+
+.fila-boton {
+  margin-top: 20px; /* Espacio entre la fila de batalla y el botón */
+}
+
+.tarjeta-batalla {
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.125);
+  transition: transform 0.3s ease;
+}
+.tarjeta-batalla:hover {
+  transform: scale(1.05);
+}
+.tarjeta-batalla h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.stats-batalla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.stats-batalla .stat {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.stats-batalla .stat:hover {
+  background-color: rgba(0,0,0,0.3);
+}
+.stat-nombre {
+  display: block;
+  color: #e0e0e0;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-valor {
+  display: block;
+  color: #ffffff;
+  font-size: 1.1em;
+}
+
+.elemento-vs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.btn-batalla {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-batalla:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Adaptación para dispositivos más pequeños */
+@media (max-width: 768px) {
+  .contenedor-batalla {
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .tarjeta-batalla {
+      width: 90%;
+      max-width: 350px;
   }
 }

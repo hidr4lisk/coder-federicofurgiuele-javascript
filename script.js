@@ -83,6 +83,7 @@ function actualizarCantidadCarrito() {
 function renderizarTienda(filtrar = '') {
     const lienzo = document.getElementById("lienzo")
     lienzo.innerHTML = ''
+    lienzo.className = 'modo-tienda'
 
     const productosAMostrar = filtrar
         ? items.filter(producto => producto.nombre.toLowerCase().includes(filtrar.toLowerCase()) ||
@@ -133,6 +134,7 @@ function agregarAlCarrito(idProducto) {
 function mostrarCarrito(filtrar = '') {
     const lienzo = document.getElementById("lienzo")
     lienzo.innerHTML = ''
+    lienzo.className = 'modo-carrito'
 
     const productosAMostrar = filtrar
         ? carrito.filter(producto => producto.nombre.toLowerCase().includes(filtrar.toLowerCase()) ||
@@ -314,11 +316,15 @@ function crearTarjetaBatalla(entidad, esJugador = true) {
 function mostrarBatalla() {
     const lienzo = document.getElementById("lienzo")
     lienzo.innerHTML = ''
+    lienzo.className = 'modo-batalla'
 
     const enemigo = generarEnemigo()
 
     const contenedorBatalla = document.createElement('div')
     contenedorBatalla.classList.add('contenedor-batalla')
+
+    const filaBatalla = document.createElement("div")
+    filaBatalla.classList.add("fila-batalla")
 
     const tarjetaJugador = crearTarjetaBatalla(jugador)
     const tarjetaEnemigo = crearTarjetaBatalla(enemigo, false)
@@ -327,17 +333,21 @@ function mostrarBatalla() {
     elementoVs.classList.add('elemento-vs')
     elementoVs.textContent = 'VS'
 
-    contenedorBatalla.appendChild(tarjetaJugador)
-    contenedorBatalla.appendChild(elementoVs)
-    contenedorBatalla.appendChild(tarjetaEnemigo)
+    filaBatalla.appendChild(tarjetaJugador)
+    filaBatalla.appendChild(elementoVs)
+    filaBatalla.appendChild(tarjetaEnemigo)
 
+    const filaBoton = document.createElement("div")
     const botonBatalla = document.createElement('button')
     botonBatalla.textContent = 'Iniciar Batalla'
     botonBatalla.classList.add('btn-batalla')
     botonBatalla.addEventListener('click', () => iniciarBatalla(jugador, enemigo))
+    filaBoton.appendChild(botonBatalla)
+
+    contenedorBatalla.appendChild(filaBatalla)
+    contenedorBatalla.appendChild(filaBoton)
 
     lienzo.appendChild(contenedorBatalla)
-    lienzo.appendChild(botonBatalla)
 }
 
 function iniciarBatalla(jugador, enemigo) {
@@ -393,15 +403,27 @@ function actualizarVisibilidadBusqueda() {
     const modo = document.querySelector("[data-modo]").dataset.modo
     const inputBuscar = document.getElementById("inputBuscar")
     const botonComprar = document.querySelector(".btn-comprar")
+    const statsPlayer = document.getElementById("stats_player")
 
-    inputBuscar.style.visibility = modo === "batalla"
-    inputBuscar.style.pointerEvents = modo === "batalla" ? "none" : "auto"
+    if (modo === "batalla") {
+        inputBuscar.style.visibility = "hidden"
+        inputBuscar.style.pointerEvents = "none"
+        statsPlayer.style.visibility = "hidden"
+        statsPlayer.style.pointerEvents = "none"
+    } else {
+        inputBuscar.style.visibility = "visible"
+        inputBuscar.style.pointerEvents = "auto"
+        statsPlayer.style.visibility = "visible"
+        statsPlayer.style.pointerEvents = "auto"
+    }
 
     if (botonComprar) {
         botonComprar.style.visibility = modo === "carrito" ? "visible" : "hidden"
         botonComprar.style.pointerEvents = modo === "carrito" ? "auto" : "none"
     }
 }
+
+
 
 function buscarProductos() {
     const termino = document.getElementById("inputBuscar").value
