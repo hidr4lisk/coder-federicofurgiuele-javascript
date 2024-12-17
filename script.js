@@ -8,7 +8,6 @@ async function cargarStats() {
     
     if (stats) {
         jugador = stats
-        jugador.diamantes = 10000
         return jugador
     }
     
