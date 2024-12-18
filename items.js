@@ -24,8 +24,8 @@ export const items = [
     { id: 19, precio: 250, atributo: "bloqueo", mejora: 10, nombre: "Bloqueo", imagen: "img/furia_3.jpg", categoria: "Legendario" },
     { id: 20, precio: 500, atributo: "bloqueo", mejora: 20, nombre: "Bloqueo", imagen: "img/furia_4.jpg", categoria: "Supremo" },
 
-    { id: 21, precio: 25, atributo: "esquivar", mejora: 1, nombre: "Evasión", imagen: "img/furia_1.jpg", categoria: "Comun" },
-    { id: 22, precio: 125, atributo: "esquivar", mejora: 5, nombre: "Evasión", imagen: "img/furia_2.jpg", categoria: "Excepcional" },
-    { id: 23, precio: 250, atributo: "esquivar", mejora: 10, nombre: "Evasión", imagen: "img/furia_3.jpg", categoria: "Legendario" },
-    { id: 24, precio: 500, atributo: "esquivar", mejora: 20, nombre: "Evasión", imagen: "img/furia_4.jpg", categoria: "Supremo" }
+    { id: 21, precio: 25, atributo: "evasion", mejora: 1, nombre: "Evasión", imagen: "img/furia_1.jpg", categoria: "Comun" },
+    { id: 22, precio: 125, atributo: "evasion", mejora: 5, nombre: "Evasión", imagen: "img/furia_2.jpg", categoria: "Excepcional" },
+    { id: 23, precio: 250, atributo: "evasion", mejora: 10, nombre: "Evasión", imagen: "img/furia_3.jpg", categoria: "Legendario" },
+    { id: 24, precio: 500, atributo: "evasion", mejora: 20, nombre: "Evasión", imagen: "img/furia_4.jpg", categoria: "Supremo" }
 ]

@@ -30,7 +30,7 @@ async function cargarStats() {
             vida: 100,
             daño: 10,
             critico: 5,
-            esquiva: 5,
+            evasion: 5,
             bloqueo: 5,
             armadura: 10,
             diamantes: 10000
@@ -267,7 +267,7 @@ function generarEnemigo() {
         vida: Math.max(50, Math.floor(jugador.vida * (0.8 + Math.random() * 0.4))),
         daño: Math.max(5, Math.floor(jugador.daño * (0.8 + Math.random() * 0.4))),
         critico: Math.max(1, Math.floor(jugador.critico * (0.8 + Math.random() * 0.4))),
-        esquiva: Math.max(1, Math.floor(jugador.esquiva * (0.8 + Math.random() * 0.4))),
+        evasion: Math.max(1, Math.floor(jugador.evasion * (0.8 + Math.random() * 0.4))),
         bloqueo: Math.max(1, Math.floor(jugador.bloqueo * (0.8 + Math.random() * 0.4))),
         armadura: Math.max(5, Math.floor(jugador.armadura * (0.8 + Math.random() * 0.4)))
     }
@@ -295,8 +295,8 @@ function crearTarjetaBatalla(entidad, esJugador = true) {
                 <span class="stat-valor">${entidad.critico}%</span>
             </div>
             <div class="stat">
-                <span class="stat-nombre">Esquiva</span>
-                <span class="stat-valor">${entidad.esquiva}%</span>
+                <span class="stat-nombre">Evasión</span>
+                <span class="stat-valor">${entidad.evasion}%</span>
             </div>
             <div class="stat">
                 <span class="stat-nombre">Bloqueo</span>
@@ -372,7 +372,7 @@ function renderizarStats() {
                 vida: 'green',
                 daño: 'red',
                 critico: 'orange',
-                esquiva: 'gray',
+                evasion: 'gray',
                 bloqueo: 'violet',
                 armadura: 'purple',
                 diamantes: 'cyan'
