@@ -157,7 +157,8 @@ function mostrarCarrito(filtrar = '') {
             <img class="producto-imagen" src="${producto.imagen}" alt="${producto.nombre}">
             <h3>${producto.nombre} +${producto.mejora}</h3>
             <p>${producto.categoria}</p>
-            <p>💎${producto.precio}</p>
+            <p>Precio Unitario: 💎${producto.precio}</p>
+            ${producto.cantidad > 1 ? `<p>Total: 💎${producto.precio * producto.cantidad}</p>` : ''}
             <p>Cantidad en Carrito: ${producto.cantidad}</p>
             <div class="botones">
                 <button class="btn-agregar click-shrink">+</button>
