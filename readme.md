@@ -2,4 +2,5 @@
 
 # Comisión 63315  -  JavaScript
 ## PROFESOR - Juanca Rabellino
+## TUTOR - Juan Narvaez
 ## ALUMNO - Federico Furgiuele
